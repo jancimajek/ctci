@@ -1,7 +1,5 @@
 <?php
 
-test();
-
 class LinkedList {
 	private $first;
 
@@ -115,4 +113,6 @@ function test() {
 	echo $list->remove(9) . PHP_EOL;
 	echo $list . PHP_EOL;
 }
+
+test();
 
