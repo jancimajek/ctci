@@ -26,13 +26,12 @@ echo $list . PHP_EOL;
 
 class LinkedList {
 	private $first;
-	private $last;
 
 	public function addToTail($data) {
 		$node = new ListElement($data);
 
 		if ($this->first !== null) {
-			for ($last = $this->first; !$last->hasNext(); $last = $last->getNext());
+			for ($last = $this->first; $last->hasNext(); $last = $last->getNext());
 			$last->setNext($node);
 		} else {
 			$this->first = $node;
@@ -55,7 +54,11 @@ class LinkedList {
 	}
 
 	public function remove($data) {
-		for ($prevNode = null, $node = $this->first; $node !== null; $prevNode = $node, $node = $node->getNext()) {
+		for (
+			$prevNode = null, $node = $this->first; 
+			$node !== null; 
+			$prevNode = $node, $node = $node->getNext()
+		) {
 			if ($node->getData() === $data) {
 				if ($prevNode === null) $this->first = $node->getNext();
 				else $prevNode->setNext($node->getNext());
@@ -98,7 +101,7 @@ class ListElement {
 	}
 
 	public function hasNext() {
-		return ($this->next === null);
+		return ($this->next !== null);
 	}
 
 	public function getNext() {
