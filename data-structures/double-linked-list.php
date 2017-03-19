@@ -1,32 +1,6 @@
 <?php
 
-$list = new LinkedList();
-$list->addToTail(0);
-$list->addToTail(1);
-$list->addToTail(2);
-$list->addToTail(3);
-$list->addToTail(4);
-$list->addToTail(5);
-$list->addToTail(6);
-$list->addToTail(7);
-$list->addToTail(8);
-$list->addToTail(9);
-
-echo $list . PHP_EOL;
-
-echo $list->findFromHead(3) . PHP_EOL;
-echo $list->findFromTail(3) . PHP_EOL;
-echo $list->findFromHead(11) . PHP_EOL;
-echo $list->findFromTail(11) . PHP_EOL;
-echo $list . PHP_EOL;
-
-echo $list->remove(3) . PHP_EOL;
-echo $list . PHP_EOL;
-echo $list->remove(0) . PHP_EOL;
-echo $list . PHP_EOL;
-echo $list->remove(9) . PHP_EOL;
-echo $list . PHP_EOL;
-
+test();
 
 class LinkedList {
 	private $first;
@@ -74,11 +48,7 @@ class LinkedList {
 	}
 
 	public function remove($data) {
-		for (
-			$prevNode = null, $node = $this->first; 
-			$node !== null; 
-			$prevNode = $node, $node = $node->getNext()
-		) {
+		for ($node = $this->first; $node !== null; $node = $node->getNext()) {
 			if ($node->getData() === $data) {
 				// Link previous node (or first node if this was the first, 
 				// i.e. there is no previous node) to the next node
@@ -160,4 +130,33 @@ class DoubleListElement {
 	public function __toString() {
 		return (string)$this->data;
 	}
+}
+
+function test() {
+	$list = new LinkedList();
+	$list->addToTail(0);
+	$list->addToTail(1);
+	$list->addToTail(2);
+	$list->addToTail(3);
+	$list->addToTail(4);
+	$list->addToTail(5);
+	$list->addToTail(6);
+	$list->addToTail(7);
+	$list->addToTail(8);
+	$list->addToTail(9);
+
+	echo $list . PHP_EOL;
+
+	echo $list->findFromHead(3) . PHP_EOL;
+	echo $list->findFromTail(3) . PHP_EOL;
+	echo $list->findFromHead(11) . PHP_EOL;
+	echo $list->findFromTail(11) . PHP_EOL;
+	echo $list . PHP_EOL;
+
+	echo $list->remove(3) . PHP_EOL;
+	echo $list . PHP_EOL;
+	echo $list->remove(0) . PHP_EOL;
+	echo $list . PHP_EOL;
+	echo $list->remove(9) . PHP_EOL;
+	echo $list . PHP_EOL;
 }
