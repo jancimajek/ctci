@@ -14,7 +14,7 @@ class Tree {
 	}
 
 	public function __toString() {
-		return $root->__toString();
+		return $this->root->__toString();
 	}
 }
 
