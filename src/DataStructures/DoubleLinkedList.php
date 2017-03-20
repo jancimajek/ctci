@@ -84,34 +84,3 @@ class DoubleLinkedList {
 		return '{' . implode('->', $retFwd) . '}' . PHP_EOL . '{' . implode('<-', $retBkw) . '}';
 	}
 }
-
-function test() {
-	$list = new LinkedList();
-	$list->addToTail(0);
-	$list->addToTail(1);
-	$list->addToTail(2);
-	$list->addToTail(3);
-	$list->addToTail(4);
-	$list->addToTail(5);
-	$list->addToTail(6);
-	$list->addToTail(7);
-	$list->addToTail(8);
-	$list->addToTail(9);
-
-	echo $list . PHP_EOL;
-
-	echo $list->findFromHead(3) . PHP_EOL;
-	echo $list->findFromTail(3) . PHP_EOL;
-	echo $list->findFromHead(11) . PHP_EOL;
-	echo $list->findFromTail(11) . PHP_EOL;
-	echo $list . PHP_EOL;
-
-	echo $list->remove(3) . PHP_EOL;
-	echo $list . PHP_EOL;
-	echo $list->remove(0) . PHP_EOL;
-	echo $list . PHP_EOL;
-	echo $list->remove(9) . PHP_EOL;
-	echo $list . PHP_EOL;
-}
-
-test();
