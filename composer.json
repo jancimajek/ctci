@@ -12,7 +12,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Janci\\ctci\\": "src/"
+      "Janci\\Ctci\\": "src/"
     }
   }
 }
