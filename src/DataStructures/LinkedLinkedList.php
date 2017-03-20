@@ -1,10 +1,12 @@
 <?php
 
+namespace Janci\Ctci\DataStructures;
+
 class LinkedList {
 	private $first;
 
 	public function addToTail($data) {
-		$node = new ListElement($data);
+		$node = new LinkedListElement($data);
 
 		if ($this->first !== null) {
 			for ($last = $this->first; $last->hasNext(); $last = $last->getNext());
@@ -15,7 +17,7 @@ class LinkedList {
 	}
 
 	public function addToHead($data) {
-		$node = new ListElement($data);
+		$node = new LinkedListElement($data);
 		if ($this->first !== null) {
 			$node->setNext($this->first);
 		}
@@ -52,40 +54,6 @@ class LinkedList {
 		}
 
 		return '{' . implode('->', $ret) . '}';
-	}
-}
-
-class ListElement {
-	// @var ListElement
-	private $next;
-	private $data;
-
-	public function __construct($data) {
-		$this->setData($data);
-	}
-
-	public function setData($data) {
-		$this->data = $data;
-	}
-
-	public function getData() {
-		return $this->data;
-	}
-
-	public function setNext(ListElement $next = null) {
-		$this->next = $next;
-	}
-
-	public function hasNext() {
-		return ($this->next !== null);
-	}
-
-	public function getNext() {
-		return $this->next;
-	}
-
-	public function __toString() {
-		return (string)$this->data;
 	}
 }
 

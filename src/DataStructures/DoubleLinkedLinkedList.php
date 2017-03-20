@@ -1,11 +1,13 @@
 <?php
 
-class LinkedList {
+namespace Janci\Ctci\DataStructures;
+
+class DoubleLinkedList {
 	private $first;
 	private $last;
 
 	public function addToTail($data) {
-		$node = new DoubleListElement($data);
+		$node = new DoubleLinkedListElement($data);
 
 		// First (and last) node of the list
 		if ($this->last === null) {
@@ -18,7 +20,7 @@ class LinkedList {
 	}
 
 	public function addToHead($data) {
-		$node = new DoubleListElement($data);
+		$node = new DoubleLinkedListElement($data);
 
 		// First (and last) node of the list
 		if ($this->first === null) {
@@ -80,53 +82,6 @@ class LinkedList {
 		}
 
 		return '{' . implode('->', $retFwd) . '}' . PHP_EOL . '{' . implode('<-', $retBkw) . '}';
-	}
-}
-
-class DoubleListElement {
-	// @var DoubleListElement
-	private $next;
-	private $prev;
-	private $data;
-
-	public function __construct($data) {
-		$this->setData($data);
-	}
-
-	public function setData($data) {
-		$this->data = $data;
-	}
-
-	public function getData() {
-		return $this->data;
-	}
-
-	public function setPrev(DoubleListElement $prev = null) {
-		$this->prev = $prev;
-	}
-
-	public function hasPrev() {
-		return ($this->prev !== null);
-	}
-
-	public function getPrev() {
-		return $this->prev;
-	}
-
-	public function setNext(DoubleListElement $next = null) {
-		$this->next = $next;
-	}
-
-	public function hasNext() {
-		return ($this->next !== null);
-	}
-
-	public function getNext() {
-		return $this->next;
-	}
-
-	public function __toString() {
-		return (string)$this->data;
 	}
 }
 
