@@ -47,6 +47,10 @@ class LinkedList {
 		return null;
 	}
 
+	public function getFirst() {
+	    return $this->first;
+    }
+
 	public function __toString() {
 		$ret= [];
 		for ($node = $this->first; $node !== null; $node = $node->getNext()) {

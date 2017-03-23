@@ -70,7 +70,15 @@ class DoubleLinkedList {
 		return null;
 	}
 
-	public function __toString() {
+    public function getFirst() {
+        return $this->first;
+    }
+
+    public function getLast() {
+        return $this->last;
+    }
+
+    public function __toString() {
 		$retFwd = [];
 		for ($node = $this->first; $node !== null; $node = $node->getNext()) {
 			$retFwd[] = $node->getData();
