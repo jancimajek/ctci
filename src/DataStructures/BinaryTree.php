@@ -9,19 +9,27 @@ class BinaryTree {
 	private $root;
 
 	public function add($data) {
-		if ($this->root === null) $this->root = new BinaryTreeNode($data);
-		else $this->root->add($data);
+		if ($this->isEmpty()) $this->setRoot(new BinaryTreeNode($data));
+		else $this->getRoot()->add($data);
 	}
 
 	public function getRoot() {
 		return $this->root;
 	}
 
+	public function setRoot(BinaryTreeNode $root = null) {
+		$this->root = $root;
+	}
+
+	public function isEmpty() {
+		return ($this->root === null);
+	}
+
 	public function breadthFirstTraversal() {
-        if ($this->root === null) return null;
+        if ($this->isEmpty()) return null;
 
 	    $queue = new Queue();
-        $queue->enqueue($this->root);
+        $queue->enqueue($this->getRoot());
 
         $ret = [];
         while (!$queue->isEmpty()) {
