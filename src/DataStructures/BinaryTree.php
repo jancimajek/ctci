@@ -17,6 +17,21 @@ class BinaryTree {
 		return $this->root;
 	}
 
+	public function breadthFirstTraversal() {
+        if ($this->root === null) return null;
+
+	    $queue = new Queue();
+        $queue->enqueue($this->root);
+
+        $ret = [];
+        while (!$queue->isEmpty()) {
+            $node = $queue->dequeue();
+            if ($node !== null) $ret[] = $node->breadthFirstTraversal($queue);
+        }
+
+        return $ret;
+    }
+
 	public function __toString() {
 		return json_encode($this->getRoot()->toArray(), JSON_PRETTY_PRINT);
 	}

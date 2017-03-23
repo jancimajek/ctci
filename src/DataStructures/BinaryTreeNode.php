@@ -19,12 +19,20 @@ class BinaryTreeNode {
 
     public function add($data) {
         if (rand(0,1)) {
-            if ($this->left === null) $this->left = new BinaryTreeNode($data);
-            else $this->left->add($data);
+            $this->addLeft($data);
         } else {
-            if ($this->right === null) $this->right = new BinaryTreeNode($data);
-            else $this->right->add($data);
+            $this->addRight($data);
         }
+    }
+
+    public function addLeft($data) {
+        if ($this->left === null) $this->left = new BinaryTreeNode($data);
+        else $this->left->add($data);
+    }
+
+    public function addRight($data) {
+        if ($this->right === null) $this->right = new BinaryTreeNode($data);
+        else $this->right->add($data);
     }
 
     public function getLeft() {
@@ -32,7 +40,7 @@ class BinaryTreeNode {
     }
 
     public function getRight() {
-        return $this->left;
+        return $this->right;
     }
 
     public function setData($data) {
@@ -41,6 +49,13 @@ class BinaryTreeNode {
 
     public function getData() {
         return $this->data;
+    }
+
+    public function breadthFirstTraversal(Queue $queue) {
+        $queue->enqueue($this->getLeft());
+        $queue->enqueue($this->getRight());
+
+        return $this->getData();
     }
 
     /**
@@ -74,5 +89,9 @@ class BinaryTreeNode {
         $ret['right'] = ($this->right ? $this->right->toArray() : null);
 
         return $ret;
+    }
+
+    public function __toString() {
+        return (string)$this->data;
     }
 }
