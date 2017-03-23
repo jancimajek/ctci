@@ -4,7 +4,13 @@ namespace Janci\Ctci\DataStructures;
 
 class BinaryTreeNode {
     private $data;
+    /**
+     * @var BinaryTreeNode
+     */
     private $left;
+    /**
+     * @var BinaryTreeNode
+     */
     private $right;
 
     public function __construct($data) {
@@ -13,10 +19,10 @@ class BinaryTreeNode {
 
     public function add($data) {
         if (rand(0,1)) {
-            if ($this->left === null) $this->left = new BinaryNode($data);
+            if ($this->left === null) $this->left = new BinaryTreeNode($data);
             else $this->left->add($data);
         } else {
-            if ($this->right === null) $this->right = new BinaryNode($data);
+            if ($this->right === null) $this->right = new BinaryTreeNode($data);
             else $this->right->add($data);
         }
     }
@@ -37,10 +43,35 @@ class BinaryTreeNode {
         return $this->data;
     }
 
-    public function __toString() {
-        $ret = (string)$this->getData() . ':[';
-        $ret .= ($this->left ? (string)$this->left : '<null>') . ',';
-        $ret .= ($this->right ? (string)$this->right : '<null>') . ']';
+    /**
+     * {
+     *   "<root-value>",
+     *   "left": {
+     *     "value": "<value>",
+     *     "left": {
+     *       "value": "<value>",
+     *       "left": null,
+     *       "right": {
+     *         "value": "<value>",
+     *         "left": null,
+     *         "right": null,
+     *       }
+     *     },
+     *     "right": null
+     *   },
+     *   "right": {
+     *     "value": "<value>"
+     *     "left": null,
+     *     "right": null
+     *   }
+     * }
+     * @return string JSON
+     */
+    public function toArray() {
+        $ret = [];
+        $ret['value'] =  $this->getData();
+        $ret['left']  = ($this->left ? $this->left->toArray() : null);
+        $ret['right'] = ($this->right ? $this->right->toArray() : null);
 
         return $ret;
     }
