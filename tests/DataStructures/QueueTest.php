@@ -14,28 +14,28 @@ class QueueTest extends TestCase
         $this->assertNull($q->dequeue());
         $this->assertNull($q->peak());
 
-        // Fill in with 1..100
-        for ($i = 0; $i < 100; $i++) {
+        // Fill in with 1..10
+        for ($i = 0; $i < 10; $i++) {
             $q->enqueue($i);
             $this->assertEquals((string)$q, '[' . implode(', ', range(0, $i)) . ']');
         }
 
         // Empty half
-        for ($i = 0; $i < 50; $i++) {
-            $this->assertEquals((string)$q, '[' . implode(', ', range($i, 99)) . ']');
+        for ($i = 0; $i < 5; $i++) {
+            $this->assertEquals((string)$q, '[' . implode(', ', range($i, 9)) . ']');
             $this->assertEquals($q->peak(), $i);
             $this->assertEquals($q->dequeue(), $i);
         }
 
-        // Add another 50
-        for ($i = 100; $i < 150; $i++) {
+        // Add another 5
+        for ($i = 10; $i < 15; $i++) {
             $q->enqueue($i);
-            $this->assertEquals((string)$q, '[' . implode(', ', range(50, $i)) . ']');
+            $this->assertEquals((string)$q, '[' . implode(', ', range(5, $i)) . ']');
         }
 
         // Empty completely
-        for ($i = 50; $i < 150; $i++) {
-            $this->assertEquals((string)$q, '[' . implode(', ', range($i, 149)) . ']');
+        for ($i = 5; $i < 15; $i++) {
+            $this->assertEquals((string)$q, '[' . implode(', ', range($i, 14)) . ']');
             $this->assertEquals($q->peak(), $i);
             $this->assertEquals($q->dequeue(), $i);
         }
