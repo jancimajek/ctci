@@ -12,9 +12,15 @@ class BinaryTreeNode {
      * @var BinaryTreeNode
      */
     private $right;
+    /**
+     * @var BinaryTreeNode
+     */
+    private $parent;
+    private $height = -1;
 
-    public function __construct($data) {
+    public function __construct($data, $parent = null) {
         $this->setData($data);
+        $this->parent = $parent;
     }
 
     public function add($data) {
@@ -26,12 +32,12 @@ class BinaryTreeNode {
     }
 
     public function addLeft($data) {
-        if ($this->getLeft() === null) $this->setLeft(new BinaryTreeNode($data));
+        if ($this->getLeft() === null) $this->setLeft(new BinaryTreeNode($data, $this));
         else $this->getLeft()->add($data);
     }
 
     public function addRight($data) {
-        if ($this->getRight() === null) $this->setRight(new BinaryTreeNode($data));
+        if ($this->getRight() === null) $this->setRight(new BinaryTreeNode($data, $this));
         else $this->getRight()->add($data);
     }
 
@@ -67,6 +73,68 @@ class BinaryTreeNode {
         return $this->data;
     }
 
+    public function getParent() {
+        return $this->parent;
+    }
+
+    public function isRoot() {
+        return ($this->parent === null);
+    }
+
+    public function getHeight() {
+        if ($this->height > -1) return $this->height;
+
+        if ($this->isRoot()) $this->height = 0;
+        else $this->height = $this->getParent()->getHeight() + 1;
+
+        return $this->height;
+    }
+
+    /**
+     * Finds lowest common ancestor with given $node
+     * O(N) runtime complexity, O(1) space complexity
+     *
+     * @param BinaryTreeNode $node
+     * @return BinaryTreeNode|null
+     */
+    public function getLowestCommonAncestor(BinaryTreeNode $node) {
+
+        // Find which node is lower and which is higher in the tree
+        if ($this->getHeight() > $node->getHeight()) {
+            $lower = $this;
+            $higher = $node;
+        } else {
+            $lower = $node;
+            $higher = $this;
+        }
+
+        // Find ancestor of the lower node on the same level as the higher node
+        while ($lower->getHeight() > $higher->getHeight()) {
+            $lower = $lower->getParent();
+        }
+
+        // Check ancestors of both nodes going level by level up the tree until they are equal --> LCA
+        while ($lower !== $higher) {
+            if ($lower === null || $higher === null) {
+                throw new \RuntimeException("Invalid Binary Tree: Nodes are not part of the same tree");
+            }
+            $lower = $lower->getParent();
+            $higher = $higher->getParent();
+        }
+
+        if ($lower === null || $higher === null) {
+            throw new \RuntimeException("Invalid Binary Tree: Nodes are not part of the same tree");
+        } else {
+            return $lower;
+        }
+    }
+
+    /**
+     * Traverse the tree breadth first
+     *
+     * @param Queue $queue
+     * @return mixed
+     */
     public function breadthFirstTraversal(Queue $queue) {
         $queue->enqueue($this->getLeft());
         $queue->enqueue($this->getRight());

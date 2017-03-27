@@ -3,10 +3,14 @@
 namespace DataStructures;
 
 use Janci\Ctci\DataStructures\BinaryTree;
+use Janci\Ctci\DataStructures\BinaryTreeNode;
 use PHPUnit\Framework\TestCase;
 
 class BinaryTreeTest extends TestCase
 {
+    /**
+     * @var BinaryTree
+     */
     private $bt;
     public function setUp()
     {
@@ -73,6 +77,47 @@ class BinaryTreeTest extends TestCase
                     }
                 }
             }'), JSON_PRETTY_PRINT)
+        );
+    }
+
+    public function testHeight() {
+        $this->assertEquals(0, $this->bt->getRoot()->getHeight());
+        $this->assertEquals(1, $this->bt->getRoot()->getLeft()->getHeight());
+        $this->assertEquals(1, $this->bt->getRoot()->getRight()->getHeight());
+        $this->assertEquals(4, $this->bt->getRoot()->getRight()->getRight()->getRight()->getRight()->getHeight());
+    }
+
+    public function testLca() {
+        $this->assertSame(
+            $this->bt->getRoot()->getRight(),
+            $this->bt->getRoot()->getRight()->getLeft()->getRight()->getLowestCommonAncestor(
+                $this->bt->getRoot()->getRight()->getRight()->getRight()->getRight()
+            )
+        );
+
+        $this->assertSame(
+            $this->bt->getRoot()->getRight(),
+            $this->bt->getRoot()->getRight()->getRight()->getRight()->getRight()->getLowestCommonAncestor(
+                $this->bt->getRoot()->getRight()->getLeft()->getRight()
+            )
+        );
+
+        $this->assertSame(
+            $this->bt->getRoot(),
+            $this->bt->getRoot()->getLowestCommonAncestor(
+                $this->bt->getRoot()
+            )
+        );
+
+        $this->expectException('RuntimeException');
+        $this->expectExceptionMessage('Invalid Binary Tree: Nodes are not part of the same tree');
+
+        $this->bt->getRoot()->getLowestCommonAncestor(
+            new BinaryTreeNode(666)
+        );
+
+        $this->bt->getRoot()->getLeft()->getLowestCommonAncestor(
+            new BinaryTreeNode(666)
         );
     }
 
