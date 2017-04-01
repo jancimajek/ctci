@@ -13,6 +13,9 @@ class BinaryTree {
 		else $this->getRoot()->add($data);
 	}
 
+	/**
+	 * @return BinaryTreeNode
+	 */
 	public function getRoot() {
 		return $this->root;
 	}
@@ -21,12 +24,18 @@ class BinaryTree {
 		$this->root = new BinaryTreeNode($data);
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function isEmpty() {
 		return ($this->root === null);
 	}
 
+	/**
+	 * @return array|null
+	 */
 	public function breadthFirstTraversal() {
-        if ($this->isEmpty()) return null;
+        if ($this->isEmpty()) return [];
 
 	    $queue = new Queue();
         $queue->enqueue($this->getRoot());

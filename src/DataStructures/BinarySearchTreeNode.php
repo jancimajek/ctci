@@ -84,4 +84,29 @@ class BinarySearchTreeNode extends BinaryTreeNode {
 		return $ret;
 	}
 
+	public function preOrderTraversal() {
+		$ret = [ $this->getData() ];
+
+		if ($this->hasLeft())
+			$ret = array_merge($ret, $this->getLeft()->preOrderTraversal());
+
+		if ($this->hasRight())
+			$ret = array_merge($ret, $this->getRight()->preOrderTraversal());
+
+		return $ret;
+	}
+
+	public function postOrderTraversal() {
+		$ret = [];
+
+		if ($this->hasLeft())
+			$ret = array_merge($ret, $this->getLeft()->postOrderTraversal());
+
+		if ($this->hasRight())
+			$ret = array_merge($ret, $this->getRight()->postOrderTraversal());
+
+		$ret[] = $this->getData();
+
+		return $ret;
+	}
 }
