@@ -3,7 +3,7 @@
 namespace Janci\Ctci\DataStructures;
 
 class BinaryTreeNode {
-    private $data;
+    protected $data;
     /**
      * @var BinaryTreeNode
      */
@@ -41,18 +41,30 @@ class BinaryTreeNode {
         else  $this->right = new BinaryTreeNode($data, $this);
     }
 
+	/**
+	 * @return bool
+	 */
     public function hasLeft() {
     	return ($this->left !== null);
     }
 
+	/**
+	 * @return BinaryTreeNode
+	 */
 	public function getLeft() {
 		return $this->left;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function hasRight() {
 		return ($this->right !== null);
 	}
 
+	/**
+	 * @return BinaryTreeNode
+	 */
 	public function getRight() {
         return $this->right;
     }
@@ -61,18 +73,30 @@ class BinaryTreeNode {
         $this->data = $data;
     }
 
+	/**
+	 * @return mixed
+	 */
     public function getData() {
         return $this->data;
     }
 
+	/**
+	 * @return BinaryTreeNode|null
+	 */
     public function getParent() {
         return $this->parent;
     }
 
+	/**
+	 * @return bool
+	 */
     public function isRoot() {
         return ($this->parent === null);
     }
 
+	/**
+	 * @return int
+	 */
     public function getHeight() {
         if ($this->height > -1) return $this->height;
 
