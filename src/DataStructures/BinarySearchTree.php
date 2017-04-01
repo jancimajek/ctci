@@ -11,9 +11,9 @@ namespace Janci\Ctci\DataStructures;
 
 class BinarySearchTree extends BinaryTree {
 
-	public function add($data) {
-		if ($this->getRoot() === null) $this->setRoot(new BinarySearchTreeNode($data));
-		else $this->getRoot()->add($data);
+	public function setRoot($data) {
+		$this->root = new BinarySearchTreeNode($data);
 	}
+
 
 }

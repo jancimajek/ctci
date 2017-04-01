@@ -11,7 +11,7 @@ namespace Janci\Ctci\DataStructures;
 
 class BinarySearchTreeNode extends BinaryTreeNode {
 	public function add($data) {
-		if (rand(0,1)) {
+		if ($data <= $this->getData()) {
 			$this->addLeft($data);
 		} else {
 			$this->addRight($data);
@@ -19,21 +19,21 @@ class BinarySearchTreeNode extends BinaryTreeNode {
 	}
 
 	public function addLeft($data) {
-		if ($this->getLeft() === null) $this->setLeft(new BinarySearchTreeNode($data));
-		else $this->getLeft()->add($data);
+		// Validate the data
+		if ($data > $this->getData())
+			throw new \RuntimeException('Cannot add ' . $data . ' to the left of ' . $this->getData());
+
+		if ($this->hasLeft()) $this->getLeft()->add($data);
+		else $this->left = new BinarySearchTreeNode($data, $this);
 	}
 
 	public function addRight($data) {
-		if ($this->getRight() === null) $this->setRight(new BinarySearchTreeNode($data));
-		else $this->getRight()->add($data);
-	}
+		// Validate the data
+		if ($data <= $this->getData())
+			throw new \RuntimeException('Cannot add ' . $data . ' to the right of ' . $this->getData());
 
-	public function setLeft(BinarySearchTreeNode $left = null) {
-		return $this->left = $left;
-	}
-
-	public function setRight(BinarySearchTreeNode $right = null) {
-		return $this->right = $right;
+		if ($this->hasRight()) $this->getRight()->add($data);
+		else $this->right = new BinarySearchTreeNode($data, $this);
 	}
 
 
