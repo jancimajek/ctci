@@ -131,4 +131,9 @@ class BinarySearchTreeTest extends TestCase
     public function testBreadthFirstTraversal() {
         $this->assertEquals($this->bst->breadthFirstTraversal(), [7,4,10,3,5,8,13,9,15,20]);
     }
+
+    public function testInOrderTraversal() {
+		$this->assertEquals($this->bst->inOrderTraversal(), [3,4,5,7,8,9,10,13,15,20]);
+		$this->assertEquals($this->bst->inOrderTraversal2(), [3,4,5,7,8,9,10,13,15,20]);
+	}
 }

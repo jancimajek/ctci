@@ -10,6 +10,19 @@ namespace Janci\Ctci\DataStructures;
 
 
 class BinarySearchTreeNode extends BinaryTreeNode {
+	/**
+	 * @var BinarySearchTreeNode
+	 */
+	protected $left;
+	/**
+	 * @var BinarySearchTreeNode
+	 */
+	protected $right;
+	/**
+	 * @var BinarySearchTreeNode
+	 */
+	protected $parent;
+
 	public function add($data) {
 		if ($data <= $this->getData()) {
 			$this->addLeft($data);
@@ -36,5 +49,39 @@ class BinarySearchTreeNode extends BinaryTreeNode {
 		else $this->right = new BinarySearchTreeNode($data, $this);
 	}
 
+	/**
+	 * @return BinarySearchTreeNode
+	 */
+	public function getLeft() {
+		return $this->left;
+	}
+
+	/**
+	 * @return BinarySearchTreeNode
+	 */
+	public function getRight() {
+		return $this->right;
+	}
+
+	/**
+	 * @return BinarySearchTreeNode
+	 */
+	public function getParent() {
+		return $this->parent;
+	}
+
+	public function inOrderTraversal() {
+		$ret = [];
+
+		if ($this->hasLeft())
+			$ret = array_merge($ret, $this->getLeft()->inOrderTraversal());
+
+		$ret[] = $this->getData();
+
+		if ($this->hasRight())
+			$ret = array_merge($ret, $this->getRight()->inOrderTraversal());
+
+		return $ret;
+	}
 
 }

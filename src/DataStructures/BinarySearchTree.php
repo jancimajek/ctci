@@ -15,5 +15,24 @@ class BinarySearchTree extends BinaryTree {
 		$this->root = new BinarySearchTreeNode($data);
 	}
 
+	public function inOrderTraversal() {
+		if ($this->isEmpty()) return [];
 
+		return $this->getRoot()->inOrderTraversal();
+	}
+
+	public function inOrderTraversal2() {
+		return self::inOrderTraversalFromNode($this->getRoot());
+	}
+
+	public static function inOrderTraversalFromNode(BinarySearchTreeNode $node = null) {
+		if ($node === null) return [];
+
+		$ret = [];
+		$ret = array_merge($ret, self::inOrderTraversalFromNode($node->getLeft()));
+		$ret[] = $node->getData();
+		$ret = array_merge($ret, self::inOrderTraversalFromNode($node->getRight()));
+
+		return $ret;
+	}
 }
