@@ -47,7 +47,7 @@ class BinaryTreeTest extends TestCase
     }
 
     public function testBinaryTree() {
-        $this->assertEquals((string)$this->bt, json_encode(json_decode('
+        $this->assertEquals(json_encode(json_decode('
             {
                 "value": 0,
                 "left": {
@@ -88,7 +88,8 @@ class BinaryTreeTest extends TestCase
                         }
                     }
                 }
-            }'), JSON_PRETTY_PRINT)
+            }'), JSON_PRETTY_PRINT),
+			(string)$this->bt
         );
     }
 
@@ -134,6 +135,6 @@ class BinaryTreeTest extends TestCase
     }
 
     public function testBreadthFirstTraversal() {
-        $this->assertEquals($this->bt->breadthFirstTraversal(), [0,3,1,5,4,8,2,9,6,7]);
+        $this->assertEquals([0,3,1,5,4,8,2,9,6,7], $this->bt->breadthFirstTraversal());
     }
 }

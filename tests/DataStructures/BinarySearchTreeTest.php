@@ -42,7 +42,7 @@ class BinarySearchTreeTest extends TestCase
     }
 
     public function testBinarySearchTree() {
-        $this->assertEquals((string)$this->bst, json_encode(json_decode('
+        $this->assertEquals(json_encode(json_decode('
             {
                 "value": 7,
                 "left": {
@@ -83,7 +83,8 @@ class BinarySearchTreeTest extends TestCase
                         }
                     }
                 }
-            }'), JSON_PRETTY_PRINT)
+            }'), JSON_PRETTY_PRINT),
+			(string)$this->bst
         );
     }
 
@@ -129,21 +130,21 @@ class BinarySearchTreeTest extends TestCase
     }
 
     public function testBreadthFirstTraversal() {
-        $this->assertEquals($this->bst->breadthFirstTraversal(), [7,4,10,3,5,8,13,9,15,20]);
+        $this->assertEquals([7,4,10,3,5,8,13,9,15,20], $this->bst->breadthFirstTraversal());
     }
 
 	public function testInOrderTraversal() {
-		$this->assertEquals($this->bst->inOrderTraversal(),   [3,4,5,7,8,9,10,13,15,20]);
-		$this->assertEquals($this->bst->inOrderTraversal2(),  [3,4,5,7,8,9,10,13,15,20]);
+		$this->assertEquals([3,4,5,7,8,9,10,13,15,20], $this->bst->inOrderTraversal());
+		$this->assertEquals([3,4,5,7,8,9,10,13,15,20], $this->bst->inOrderTraversal2());
 	}
 
 	public function testPreOrderTraversal() {
-		$this->assertEquals($this->bst->preOrderTraversal(),  [7,4,3,5,10,8,9,13,15,20]);
-		$this->assertEquals($this->bst->preOrderTraversal2(), [7,4,3,5,10,8,9,13,15,20]);
+		$this->assertEquals([7,4,3,5,10,8,9,13,15,20], $this->bst->preOrderTraversal());
+		$this->assertEquals([7,4,3,5,10,8,9,13,15,20], $this->bst->preOrderTraversal2());
 	}
 
 	public function testPostOrderTraversal() {
-		$this->assertEquals($this->bst->postOrderTraversal(),  [3,5,4,9,8,20,15,13,10,7]);
-		$this->assertEquals($this->bst->postOrderTraversal2(), [3,5,4,9,8,20,15,13,10,7]);
+		$this->assertEquals([3,5,4,9,8,20,15,13,10,7], $this->bst->postOrderTraversal());
+		$this->assertEquals([3,5,4,9,8,20,15,13,10,7], $this->bst->postOrderTraversal2());
 	}
 }
