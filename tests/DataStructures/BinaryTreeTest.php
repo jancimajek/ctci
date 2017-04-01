@@ -12,6 +12,18 @@ class BinaryTreeTest extends TestCase
      * @var BinaryTree
      */
     private $bt;
+
+	/**
+	 *          0
+	 *        /   \
+	 *       3     1
+	 *      / \   / \
+	 *     5  4  8   2
+	 *            \   \
+	 *            9   6
+	 *                 \
+	 *                 7
+	 */
     public function setUp()
     {
         $this->bt = new BinaryTree();

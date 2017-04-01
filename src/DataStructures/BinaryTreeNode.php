@@ -7,16 +7,16 @@ class BinaryTreeNode {
     /**
      * @var BinaryTreeNode
      */
-    private $left;
+    protected $left;
     /**
      * @var BinaryTreeNode
      */
-    private $right;
+	protected $right;
     /**
      * @var BinaryTreeNode
      */
-    private $parent;
-    private $height = -1;
+	protected $parent;
+	protected $height = -1;
 
     public function __construct($data, $parent = null) {
         $this->setData($data);
@@ -32,13 +32,13 @@ class BinaryTreeNode {
     }
 
     public function addLeft($data) {
-        if ($this->getLeft() === null) $this->setLeft(new BinaryTreeNode($data, $this));
-        else $this->getLeft()->add($data);
+        if ($this->hasLeft()) $this->getLeft()->add($data);
+        else $this->left = new BinaryTreeNode($data, $this);
     }
 
     public function addRight($data) {
-        if ($this->getRight() === null) $this->setRight(new BinaryTreeNode($data, $this));
-        else $this->getRight()->add($data);
+        if ($this->hasRight()) $this->getRight()->add($data);
+        else  $this->right = new BinaryTreeNode($data, $this);
     }
 
     public function hasLeft() {
@@ -49,10 +49,6 @@ class BinaryTreeNode {
 		return $this->left;
 	}
 
-	public function setLeft(BinaryTreeNode $left = null) {
-		return $this->left = $left;
-	}
-
 	public function hasRight() {
 		return ($this->right !== null);
 	}
@@ -60,10 +56,6 @@ class BinaryTreeNode {
 	public function getRight() {
         return $this->right;
     }
-
-	public function setRight(BinaryTreeNode $right = null) {
-		return $this->right = $right;
-	}
 
 	public function setData($data) {
         $this->data = $data;

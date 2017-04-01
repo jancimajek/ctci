@@ -6,10 +6,10 @@ class BinaryTree {
     /**
      * @var BinaryTreeNode
      */
-	private $root;
+	protected $root;
 
 	public function add($data) {
-		if ($this->isEmpty()) $this->setRoot(new BinaryTreeNode($data));
+		if ($this->isEmpty()) $this->setRoot($data);
 		else $this->getRoot()->add($data);
 	}
 
@@ -17,8 +17,8 @@ class BinaryTree {
 		return $this->root;
 	}
 
-	public function setRoot(BinaryTreeNode $root = null) {
-		$this->root = $root;
+	public function setRoot($data) {
+		$this->root = new BinaryTreeNode($data);
 	}
 
 	public function isEmpty() {
