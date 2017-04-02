@@ -147,4 +147,18 @@ class BinarySearchTreeTest extends TestCase
 		$this->assertEquals([3,5,4,9,8,20,15,13,10,7], $this->bst->postOrderTraversal());
 		$this->assertEquals([3,5,4,9,8,20,15,13,10,7], $this->bst->postOrderTraversal2());
 	}
+
+	public function testFindKthSmallest() {
+    	foreach ($this->bst->inOrderTraversal() as $i => $data) {
+			$this->assertEquals($data, BinarySearchTree::findKthSmallest($this->bst->getRoot(), $i)->getData());
+		}
+
+		// Test out of bounds
+		$this->assertNull(BinarySearchTree::findKthSmallest($this->bst->getRoot(), 10));
+
+    	// Test invalid k
+    	$this->expectException("Exception");
+    	$this->expectExceptionMessage("Invalide value of k: -1");
+    	BinarySearchTree::findKthSmallest($this->bst->getRoot(), -1);
+	}
 }

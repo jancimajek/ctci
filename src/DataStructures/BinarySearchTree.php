@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jan.majek
- * Date: 23/03/2017
- * Time: 11:06
- */
 
 namespace Janci\Ctci\DataStructures;
 
@@ -91,4 +85,60 @@ class BinarySearchTree extends BinaryTree {
 		return $ret;
 	}
 
+	/**
+	 * Finds $k-th smallest node in the BST
+	 *
+	 *          7
+	 *        /   \
+	 *       4     10
+	 *      / \   / \
+	 *     3  5  8   13
+	 *            \   \
+	 *            9   15
+	 *                 \
+	 *                 20
+	 *
+	 * @param BinarySearchTreeNode $node
+	 * @param int $k
+	 * @param int $cnt
+	 * @return BinarySearchTreeNode
+	 */
+	public static function findKthSmallest(BinarySearchTreeNode $node, $k) {
+		list ($ret, $cnt) = self::findKthSmallestHelper($node, $k);
+		return ($cnt == $k) ? $ret : null;
+	}
+
+	/**
+	 * Helper to find $k-th smalles node in the BST; return array of the node found and the count
+	 * @param BinarySearchTreeNode $node
+	 * @param int $k
+	 * @param int $cnt
+	 * @return array [BinarySearchTreeNode, int]
+	 * @throws \Exception
+	 */
+	public static function findKthSmallestHelper(BinarySearchTreeNode $node, $k, $cnt = -1) {
+		// Validate $k
+		$k = (int)$k;
+		if ($k < 0) throw new \Exception('Invalide value of k: ' . $k);
+
+		// Default return self when at the first (smallest) node
+		$ret = $node;
+
+		// Dive left
+		if ($node->hasLeft()) {
+			list($ret, $cnt) = self::findKthSmallestHelper($node->getLeft(), $k, $cnt);
+			if ($cnt == $k) return [$ret, $cnt];
+		}
+
+		// Increment count & check if found --> return this $node
+		$cnt++;
+		if ($cnt == $k) return [$node, $cnt];
+
+		// Dive right
+		if ($node->hasRight()) {
+			list($ret, $cnt) = self::findKthSmallestHelper($node->getRight(), $k, $cnt);
+		}
+
+		return [$ret, $cnt];
+	}
 }

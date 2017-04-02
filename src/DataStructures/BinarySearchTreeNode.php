@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jan.majek
- * Date: 23/03/2017
- * Time: 12:07
- */
 
 namespace Janci\Ctci\DataStructures;
 
