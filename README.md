@@ -2,3 +2,4 @@
 
  * Missing `$this` for class variables
  * Missing closing parentheses in conditions
+ * Make indices, counts, increments, etc 0-based to minimise off-by-ine errors
