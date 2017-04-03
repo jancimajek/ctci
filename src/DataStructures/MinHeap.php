@@ -108,4 +108,9 @@ class MinHeap {
 
 		return $ret;
 	}
+
+	public function __toArray() {
+	    // Merging with empty array will reset keys from 0;
+	    return array_merge([], $this->heap);
+    }
 }
