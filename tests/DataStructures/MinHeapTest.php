@@ -2,16 +2,14 @@
 
 namespace DataStructures;
 
-use Janci\Ctci\DataStructures\Heap;
+use Janci\Ctci\DataStructures\MinHeap;
 use PHPUnit\Framework\TestCase;
 
 class MinHeapTest extends TestCase
 {
     public function testMinHeap()
     {
-        $h = new Heap(
-            function($a, $b) { return $a <= $b; }
-        );
+        $h = new MinHeap();
 
         $this->assertEquals([], $h->__toArray());
         $this->assertNull($h->peek());
