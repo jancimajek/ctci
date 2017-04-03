@@ -9,13 +9,22 @@
 namespace Janci\Ctci\DataStructures;
 
 
-class MinHeap {
+class Heap {
 	/**
 	 * @var array
 	 */
 	protected $heap = [];
 
-	public function add($data) {
+    /**
+     * @var \Closure
+     */
+	protected $compareFunc;
+
+	public function __construct(callable $compareFunc) {
+	    $this->compareFunc = $compareFunc;
+    }
+
+    public function add($data) {
 
 		// First element
 		if (!isset($this->heap[1])) {
@@ -54,7 +63,7 @@ class MinHeap {
 		$node = count($this->heap);
 		$parent = floor($node / 2);
 
-		while ($parent > 0 && $this->heap[$node] < $this->heap[$parent]) {
+		while ($parent > 0 && $this->compareFunc->__invoke($this->heap[$node], $this->heap[$parent])) {
 			$this->swap($node, $parent);
 			$node = $parent;
 			$parent = floor($node / 2);
@@ -69,9 +78,9 @@ class MinHeap {
 		$right = $node * 2 + 1;
 
 		while ($left <= $last) {
-			$minChild = ($right > $last || $this->heap[$left] <= $this->heap[$right]) ? $left : $right;
+			$minChild = ($right > $last || $this->compareFunc->__invoke($this->heap[$left], $this->heap[$right])) ? $left : $right;
 
-			if ($this->heap[$node] <= $this->heap[$minChild]) {
+			if ($this->compareFunc->__invoke($this->heap[$node], $this->heap[$minChild])) {
 				break;
 			}
 
