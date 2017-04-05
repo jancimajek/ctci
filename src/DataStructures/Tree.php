@@ -18,7 +18,3 @@ class Tree {
 	}
 }
 
-function test() {
-}
-
-test();
